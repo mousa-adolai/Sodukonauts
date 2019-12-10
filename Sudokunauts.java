@@ -5,15 +5,31 @@ class Sudokunauts extends JFrame{
    JTextField inputx,inputy,tf11,tf12,tf13,tf14,tf15,tf16,tf17,tf18,tf19,tf21,tf22,tf23,tf24,tf25,tf26,tf27,tf28,tf29,tf31,tf32,tf33,tf34,tf35,tf36,tf37,tf38,tf39,tf41,tf42,tf43,tf44,tf45,tf46,tf47,tf48,tf49,tf51,tf52,tf53,tf54,tf55,tf56,tf57,tf58,tf59,tf61,tf62,tf63,tf64,tf65,tf66,tf67,tf68,tf69,tf71,tf72,tf73,tf74,tf75,tf76,tf77,tf78,tf79,tf81,tf82,tf83,tf84,tf85,tf86,tf87,tf88,tf89,tf91,tf92,tf93,tf94,tf95,tf96,tf97,tf98,tf99;
    JButton b1,b2,b3,b4,b5,b6,b7,b8,b9;
    Timer timer;
-   int timeInt,mistakes=0;
+   int timeInt,mistakes=0,x,y;
    JLabel title,timeLabel,WinorLose,X,Y,mistakesLabel;
    int[][] check,ans;
+   JMenuBar menubar;
+   JMenu file;
+   JMenuItem exit,reset;
+   JPanel middle;
    Sudokunauts(){
+      menubar = new JMenuBar();
+      setJMenuBar(menubar);
+      file  = new JMenu("file");
+      menubar.add(file);
+      exit = new JMenuItem("exit");
+      file.add(exit);
+      reset = new JMenuItem("reset");
+      file.add(reset);
+      SystemClose c = new SystemClose();
+      SystemReset r = new SystemReset();
+      exit.addActionListener(c);
+      reset.addActionListener(r);
       Container pane = this.getContentPane();//whole board declared
       pane.setLayout(new GridLayout(4,1,5,5));//top(title,timer,and placement),middle(actual sudoku board),bottom1(Buttons),bottom2(the programs dialoige i.e you made a mistake,you win, or you lose)
       JPanel top = new JPanel();//top started
       top.setLayout(new GridLayout(1,6));
-      X = new JLabel("Placement x");
+      X = new JLabel("Placement X");
       top.add(X);
       inputx = new JTextField();
       top.add(inputx);
@@ -28,7 +44,7 @@ class Sudokunauts extends JFrame{
       timeLabel= new JLabel("Timer: 0");
       top.add(timeLabel);
       pane.add(top);//top done
-      JPanel middle = new JPanel();//middle started
+      middle = new JPanel();//middle started
       middle.setLayout(new GridLayout(9,9));
       tf11 =new JTextField();
       middle.add(tf11);
@@ -232,17 +248,203 @@ class Sudokunauts extends JFrame{
       bottom2.add(WinorLose);
       pane.add(bottom2);
    }
-   public class event implements ActionListener{
+   public class event implements ActionListener{//button action
       public void actionPerformed(ActionEvent e){
+         int buttonnum = Integer.parseInt(e.getActionCommand());
+         try{
+            x = Integer.parseInt(inputy.getText());
+            y = Integer.parseInt(inputx.getText());
+            if(x<1||x>9||y<1||y>9){
+               WinorLose.setText("prameters are 1-9 for both text fields please try again with appropriate data");
+               return;
+            }
+         }
+         catch(NumberFormatException ex){
+            WinorLose.setText("prameters are 1-9 for both text fields please try again with appropriate data");
+            return;
+         }//setting our variables next task is to make it appear
+         //I cant think of a smarter way of doing this right now so I will be hard coding the appear process
+         if(x==1&&y==1)
+            tf11.setText(""+buttonnum);
+         else if(x==1&&y==2)
+            tf12.setText(""+buttonnum);
+         else if(x==1&&y==3)
+            tf13.setText(""+buttonnum);
+         else if(x==1&&y==4)
+            tf14.setText(""+buttonnum);
+         else if(x==1&&y==5)
+            tf15.setText(""+buttonnum);
+         else if(x==1&&y==6)
+            tf16.setText(""+buttonnum);
+         else if(x==1&&y==7)
+            tf17.setText(""+buttonnum);
+         else if(x==1&&y==8)
+            tf18.setText(""+buttonnum);
+         else if(x==1&&y==9)
+            tf19.setText(""+buttonnum);
+         else if(x==2&&y==1)
+            tf21.setText(""+buttonnum);
+         else if(x==2&&y==2)
+            tf22.setText(""+buttonnum);
+         else if(x==2&&y==3)
+            tf23.setText(""+buttonnum);
+         else if(x==2&&y==4)
+            tf24.setText(""+buttonnum);
+         else if(x==2&&y==5)
+            tf25.setText(""+buttonnum);
+         else if(x==2&&y==6)
+            tf26.setText(""+buttonnum);
+         else if(x==2&&y==7)
+            tf27.setText(""+buttonnum);
+         else if(x==2&&y==8)
+            tf28.setText(""+buttonnum);
+         else if(x==2&&y==9)
+            tf29.setText(""+buttonnum);
+         else if(x==3&&y==1)
+            tf31.setText(""+buttonnum);
+         else if(x==3&&y==2)
+            tf32.setText(""+buttonnum);
+         else if(x==3&&y==3)
+            tf33.setText(""+buttonnum);
+         else if(x==3&&y==4)
+            tf34.setText(""+buttonnum);
+         else if(x==3&&y==5)
+            tf35.setText(""+buttonnum);
+         else if(x==3&&y==6)
+            tf36.setText(""+buttonnum);
+         else if(x==3&&y==7)
+            tf37.setText(""+buttonnum);
+         else if(x==3&&y==8)
+            tf38.setText(""+buttonnum);
+         else if(x==3&&y==9)
+            tf39.setText(""+buttonnum);
+         else if(x==4&&y==1)
+            tf41.setText(""+buttonnum);
+         else if(x==4&&y==2)
+            tf42.setText(""+buttonnum);
+         else if(x==4&&y==3)
+            tf43.setText(""+buttonnum);
+         else if(x==4&&y==4)
+            tf44.setText(""+buttonnum);
+         else if(x==4&&y==5)
+            tf45.setText(""+buttonnum);
+         else if(x==4&&y==6)
+            tf46.setText(""+buttonnum);
+         else if(x==4&&y==7)
+            tf47.setText(""+buttonnum);
+         else if(x==4&&y==8)
+            tf48.setText(""+buttonnum);
+         else if(x==4&&y==9)
+            tf49.setText(""+buttonnum);
+         else if(x==5&&y==1)
+            tf51.setText(""+buttonnum);
+         else if(x==5&&y==2)
+            tf52.setText(""+buttonnum);
+         else if(x==5&&y==3)
+            tf53.setText(""+buttonnum); 
+         else if(x==5&&y==4)
+            tf54.setText(""+buttonnum); 
+         else if(x==5&&y==5)
+            tf55.setText(""+buttonnum);
+         else if(x==5&&y==6)
+            tf56.setText(""+buttonnum);
+         else if(x==5&&y==7)
+            tf57.setText(""+buttonnum);
+         else if(x==5&&y==8)
+            tf58.setText(""+buttonnum);
+         else if(x==5&&y==9)
+            tf59.setText(""+buttonnum);
+         else if(x==6&&y==1)
+            tf61.setText(""+buttonnum);
+         else if(x==6&&y==2)
+            tf62.setText(""+buttonnum);
+         else if(x==6&&y==3)
+            tf63.setText(""+buttonnum); 
+         else if(x==6&&y==4)
+            tf64.setText(""+buttonnum); 
+         else if(x==6&&y==5)
+            tf65.setText(""+buttonnum);
+         else if(x==6&&y==6)
+            tf66.setText(""+buttonnum);
+         else if(x==6&&y==7)
+            tf67.setText(""+buttonnum);
+         else if(x==6&&y==8)
+            tf68.setText(""+buttonnum);
+         else if(x==6&&y==9)
+            tf69.setText(""+buttonnum); 
+         else if(x==7&&y==1)
+            tf71.setText(""+buttonnum);
+         else if(x==7&&y==2)
+            tf72.setText(""+buttonnum);
+         else if(x==7&&y==3)
+            tf73.setText(""+buttonnum); 
+         else if(x==7&&y==4)
+            tf74.setText(""+buttonnum); 
+         else if(x==7&&y==5)
+            tf75.setText(""+buttonnum);
+         else if(x==7&&y==6)
+            tf76.setText(""+buttonnum);
+         else if(x==7&&y==7)
+            tf77.setText(""+buttonnum);
+         else if(x==7&&y==8)
+            tf78.setText(""+buttonnum);
+         else if(x==7&&y==9)
+            tf79.setText(""+buttonnum);         
+         else if(x==8&&y==1)
+            tf81.setText(""+buttonnum);
+         else if(x==8&&y==2)
+            tf82.setText(""+buttonnum);
+         else if(x==8&&y==3)
+            tf83.setText(""+buttonnum); 
+         else if(x==8&&y==4)
+            tf84.setText(""+buttonnum); 
+         else if(x==8&&y==5)
+            tf85.setText(""+buttonnum);
+         else if(x==8&&y==6)
+            tf86.setText(""+buttonnum);
+         else if(x==8&&y==7)
+            tf87.setText(""+buttonnum);
+         else if(x==8&&y==8)
+            tf88.setText(""+buttonnum);
+         else if(x==8&&y==9)
+            tf89.setText(""+buttonnum);  
+         else if(x==9&&y==1)
+            tf91.setText(""+buttonnum);
+         else if(x==9&&y==2)
+            tf92.setText(""+buttonnum);
+         else if(x==9&&y==3)
+            tf93.setText(""+buttonnum); 
+         else if(x==9&&y==4)
+            tf94.setText(""+buttonnum); 
+         else if(x==9&&y==5)
+            tf95.setText(""+buttonnum);
+         else if(x==9&&y==6)
+            tf96.setText(""+buttonnum);
+         else if(x==9&&y==7)
+            tf97.setText(""+buttonnum);
+         else if(x==9&&y==8)
+            tf98.setText(""+buttonnum);
+         else if(x==9&&y==9)
+            tf99.setText(""+buttonnum);         
+            }
+   }
+   public class SystemClose implements ActionListener{//exit
+      public void actionPerformed(ActionEvent c){
+         System.exit(0);
+      }
+   }
+   public class SystemReset implements ActionListener{//reset
+      public void actionPerformed(ActionEvent r){
       
       }
    }
+
    public static void main(String[] args){
-   Sudokunauts mousa = new Sudokunauts();
-   mousa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   mousa.pack();
-   mousa.setVisible(true);
-   mousa.setTitle("Sudokunauts");
+      Sudokunauts mousa = new Sudokunauts();
+      mousa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      mousa.pack();
+      mousa.setVisible(true);
+      mousa.setTitle("Sudokunauts");
    
    }
 
